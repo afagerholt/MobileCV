@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Projects\\wo1701-Visma Scanner\\MobileCV\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v23\\abc_control_background_material.xml",
+        "source": "C:\\Projects\\wo1701-Visma Scanner\\MobileCV\\Application\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\drawable-v23\\abc_control_background_material.xml"
+    },
+    {
+        "merged": "C:\\Projects\\wo1702-MobileCV\\MobileCV\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v23\\abc_control_background_material.xml",
+        "source": "C:\\Projects\\wo1702-MobileCV\\MobileCV\\Application\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\drawable-v23\\abc_control_background_material.xml"
+    },
+    {
+        "merged": "C:\\Projects\\wo1701-Visma Scanner\\Camera2Basic\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v23\\abc_control_background_material.xml",
+        "source": "C:\\Projects\\wo1701-Visma Scanner\\Camera2Basic\\Application\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\drawable-v23\\abc_control_background_material.xml"
+    }
+]

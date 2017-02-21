@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Projects\\wo1702-MobileCV\\MobileCV\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_launcher.png",
+        "source": "C:\\Projects\\wo1702-MobileCV\\MobileCV\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Projects\\wo1701-Visma Scanner\\MobileCV\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_launcher.png",
+        "source": "C:\\Projects\\wo1701-Visma Scanner\\MobileCV\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Projects\\wo1701-Visma Scanner\\Camera2Basic\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_launcher.png",
+        "source": "C:\\Projects\\wo1701-Visma Scanner\\Camera2Basic\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Projects\\wo1701-Visma Scanner\\Camera2Basic\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_action_info.png",
+        "source": "C:\\Projects\\wo1701-Visma Scanner\\Camera2Basic\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_action_info.png"
+    },
+    {
+        "merged": "C:\\Projects\\wo1702-MobileCV\\MobileCV\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_action_info.png",
+        "source": "C:\\Projects\\wo1702-MobileCV\\MobileCV\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_action_info.png"
+    },
+    {
+        "merged": "C:\\Projects\\wo1701-Visma Scanner\\MobileCV\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_action_info.png",
+        "source": "C:\\Projects\\wo1701-Visma Scanner\\MobileCV\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_action_info.png"
+    }
+]
