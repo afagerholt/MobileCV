@@ -67,6 +67,7 @@ MERGED from [com.android.support:support-core-utils:25.0.1] C:\Projects\wo1702-M
 MERGED from [com.android.support:animated-vector-drawable:25.0.1] C:\Projects\wo1702-MobileCV\MobileCV\Application\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:25.0.1] C:\Projects\wo1702-MobileCV\MobileCV\Application\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\AndroidManifest.xml:21:5-43
 MERGED from [com.android.support:support-compat:25.0.1] C:\Projects\wo1702-MobileCV\MobileCV\Application\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\AndroidManifest.xml:21:5-23:58
+MERGED from [MobileCV:openCVLibrary320:unspecified] C:\Projects\wo1702-MobileCV\MobileCV\Application\build\intermediates\exploded-aar\MobileCV\openCVLibrary320\unspecified\AndroidManifest.xml:7:5-9:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:support-v13:25.0.1] C:\Projects\wo1702-MobileCV\MobileCV\Application\build\intermediates\exploded-aar\com.android.support\support-v13\25.0.1\AndroidManifest.xml:23:9-52
 	android:targetSdkVersion

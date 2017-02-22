@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -58,6 +59,12 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -236,6 +243,8 @@ public class Camera2BasicFragment extends Fragment
      */
     private File mFile;
 
+
+    private int framenumber = 0;
     /**
      * This a callback object for the {@link ImageReader}. "onImageAvailable" will be called when a
      * still image is ready to be saved.
@@ -245,10 +254,32 @@ public class Camera2BasicFragment extends Fragment
 
         @Override
         public void onImageAvailable(ImageReader reader) {
-            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+            mBackgroundHandler.post(new ImageSaver2(reader.acquireNextImage(), mFile));
+
+
+            //todo:
+            //mBackgroundHandler.post(new ImageAnalyzer(reader.acquireNextImage(), mFile));
+
+            framenumber +=1;
+            System.out.println(framenumber);
         }
 
     };
+
+    private byte[] analyzeImage(Image mImage) {
+        int rows = mImage.getHeight();
+        int cols = mImage.getWidth();
+
+        ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
+        byte[] bytes = new byte[buffer.remaining()];
+
+        Mat mat = new Mat(rows, cols, CvType.CV_8UC1);
+        mat.put(0, 0, bytes);
+        int length = (int) (mat.total() * mat.channels());
+        byte[] newBytes = new byte[length];
+        mat.get(0,0, bytes);
+        return newBytes;
+    }
 
     /**
      * {@link CaptureRequest.Builder} for the camera preview
@@ -296,7 +327,7 @@ public class Camera2BasicFragment extends Fragment
             switch (mState) {
                 case STATE_PREVIEW: {
                     //todo: initializing numberOfStoredFrames and attempting to call own saving method.
-                    if (numberOfStoredFrames <= 10) {
+                    if (numberOfStoredFrames <= 1) {
                         savePreviewShot();
                         numberOfStoredFrames += 1;
                     }
@@ -856,7 +887,7 @@ public class Camera2BasicFragment extends Fragment
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss:SSS");
                     Date resultdate = new Date(System.currentTimeMillis());
                     String mFileName = sdf.format(resultdate);
-                    mFile = new File(getActivity().getExternalFilesDir(null), "pic "+mFileName+" preview.jpg");
+                    mFile = new File(getActivity().getExternalFilesDir(null), "canny "+mFileName+" preview.jpg");
 
                     Log.i("Saved file", ""+mFile.toString());
                     unlockFocus();
@@ -974,6 +1005,132 @@ public class Camera2BasicFragment extends Fragment
             requestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
                     CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
         }
+    }
+
+    /** todo: My implementation of a OpenCV Analysis
+     *
+     */
+
+    private static class ImageAnalyzer implements Runnable {
+
+        private final Image mImage;
+        private final File mFile;
+
+        public ImageAnalyzer(Image image, File file) {
+            mImage = image;
+            mFile = file;
+        }
+
+        static Mat getMatFromImage(Image mImage) {
+            System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+            int rows = mImage.getHeight();
+            int cols = mImage.getWidth();
+
+            ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
+            byte[] bytes = new byte[buffer.remaining()];
+
+            Mat mat = new Mat(rows, cols, CvType.CV_8UC3);
+            mat.put(0, 0, bytes);
+            return mat;
+        }
+        static byte[] getBytesFromMat(Mat mat) {
+            byte[] bytes = new byte[(int) (mat.total() * mat.channels())];
+            mat.get(0,0, bytes);
+            return bytes;
+        }
+
+
+        @Override
+        public void run() {
+
+
+            Mat mat = getMatFromImage(mImage);
+            byte[] bytes = getBytesFromMat(mat);
+
+            FileOutputStream output = null;
+            try {
+                output = new FileOutputStream(mFile);
+                output.write(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                mImage.close();
+                if (null != output) {
+                    try {
+                        output.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    /** Todo: Commenting out the ImageSaver and copying it to produce my own, taking in a byte[] instead of Image
+     *
+     */
+
+    private static class ImageSaver2 implements Runnable {
+
+        /**
+         * The JPEG image
+         */
+        //private final Image mImage;
+        /**
+         * The file we save the image into.
+         */
+        private final File mFile;
+        private final Image mImage;
+
+        public ImageSaver2(Image image, File file) {
+            mImage = image;
+            mFile = file;
+        }
+
+        @Override
+        public void run() {
+            ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
+            byte[] bytes = new byte[buffer.remaining()];
+            buffer.get(bytes);
+
+            //int rows = mImage.getHeight()-mImage.getPlanes()[0].getRowStride();
+            //int cols = mImage.getWidth()-mImage.getPlanes()[0].getPixelStride();
+            int rows = mImage.getHeight()+30;
+            int cols = mImage.getWidth()+30;
+
+            Mat mat = new Mat(rows, cols, CvType.CV_8UC1);
+            mat.put(0, 0, bytes);
+            int length = (int) (mat.total() * mat.channels());
+
+            //Mat blurred = new Mat(mat.size(), mat.type());
+            //Core.bitwise_not(mat, mat);
+            //Imgproc.Canny(mat, mat, 50, 200);
+            //Imgproc.resize(mat, mat, new org.opencv.core.Size(3, 2));
+
+            //Bitmap bmp = Bitmap.createBitmap(mImage.getWidth(), mImage.getHeight(), Bitmap.Config.ARGB_8888);
+            //Utils.matToBitmap(mat, bmp);
+            byte[] newBytes = new byte[length];
+
+            mat.get(0,0, newBytes);
+
+            FileOutputStream output = null;
+            try {
+                output = new FileOutputStream(mFile);
+                output.write(newBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                //mImage.close();
+                if (null != output) {
+                    try {
+                        output.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
     }
 
     /**

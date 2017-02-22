@@ -3,6 +3,15 @@
 
     <item
         is-multidex="false"
+        jar="C:\Projects\wo1702-MobileCV\MobileCV\Application\build\intermediates\exploded-aar\MobileCV\openCVLibrary320\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="840dd1ce27b3e5be523a408673e6e05e924a9471">
+        <dex dex="C:\Projects\wo1702-MobileCV\MobileCV\Application\build\intermediates\pre-dexed\debug\MobileCV-openCVLibrary320-unspecified_b1bb370e212584867f3199118294d366e845e2f2.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Projects\wo1702-MobileCV\MobileCV\Application\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
